@@ -7,173 +7,82 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <meta name="theme-color" content="#0F1623">
+  <meta name="theme-color" content="#121821">
   <link rel="manifest" href="./manifest.webmanifest">
-
   <style>
-    /* ======= Palette aggiornata (più contrasto) ======= */
-    :root{
-      --bg:#0A0F18;           /* sfondo */
-      --bg-grad-1: rgba(93,204,255,.12);
-      --bg-grad-2: rgba(255,179,71,.10);
-      --card:#101826;         /* riquadri */
-      --card-2:#0B111B;
-      --text:#E9F1FA;         /* testo principale */
-      --muted:#9FB3C8;        /* testo attenuato */
-      --accent:#5CC8FF;       /* azzurro primario */
-      --accent-2:#A882FF;     /* viola secondario */
-      --ok:#19C37D;           /* verde */
-      --warn:#FFCE3A;         /* giallo */
-      --danger:#FF6B6B;       /* rosso */
-      --border:#2B3A51;       /* bordo più visibile */
-      --ring:0 0 0 3px rgba(92,200,255,.28);
-      --radius:18px;
-      --shadow:0 12px 36px rgba(0,0,0,.38);
-    }
-
+    :root{--bg:#0b0f14;--card:#121821;--muted:#9fb0c3;--text:#e8f0f7;--accent:#5cc8ff;--ok:#19c37d;--warn:#ffce3a;--danger:#ff6b6b;--ring:0 0 0 3px rgba(92,200,255,.25);--radius:18px;--shadow:0 10px 30px rgba(0,0,0,.35)}
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 8% 0%, var(--bg-grad-1), transparent 60%),
-        radial-gradient(1200px 800px at 100% 100%, var(--bg-grad-2), transparent 55%),
-        var(--bg);
-    }
-
-    header{
-      background:linear-gradient(180deg, rgba(10,15,24,.92), rgba(10,15,24,.66));
-      border-bottom:1px solid rgba(255,255,255,.08)
-    }
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;color:var(--text);background:radial-gradient(1200px 800px at 10% 0%, rgba(92,200,255,.10), transparent 60%),radial-gradient(1200px 800px at 100% 100%, rgba(25,195,125,.08), transparent 50%),var(--bg)}
+    header{background:linear-gradient(180deg, rgba(11,15,20,.9), rgba(11,15,20,.65));border-bottom:1px solid rgba(255,255,255,.06)}
     .wrap{max-width:900px;margin:0 auto;padding:14px 12px}
     .title{display:flex;align-items:center;gap:12px}
-    .logo{
-      width:36px;height:36px;border-radius:10px;
-      background:conic-gradient(from 210deg at 50% 50%, var(--accent), var(--accent-2), var(--accent));
-      box-shadow:var(--shadow)
-    }
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#8ee8ff);box-shadow:var(--shadow)}
     h1{font-size:20px;margin:0}
     .subtitle{font-size:12px;color:var(--muted)}
-
-    .btn{
-      appearance:none;border:0;border-radius:14px;padding:14px 16px;
-      font-weight:700;cursor:pointer;
-      background:linear-gradient(135deg,var(--accent),#8EE8FF);
-      color:#031b28; box-shadow:var(--shadow)
-    }
-    .btn.secondary{
-      background:linear-gradient(180deg,#0F1623,#0C131E);
-      color:var(--text);border:1px solid rgba(255,255,255,.14)
-    }
-    .btn.danger{
-      background:linear-gradient(135deg,#FF8B8B,var(--danger));color:#2c0000
-    }
-
+    .btn{appearance:none;border:0;border-radius:14px;padding:14px 16px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),#8ee8ff);color:#002236;box-shadow:var(--shadow)}
+    .btn.secondary{background:#0f141c;color:var(--text);border:1px solid rgba(255,255,255,.12)}
+    .btn.danger{background:linear-gradient(135deg,#ff8b8b,var(--danger));color:#3a0000}
     main{padding:12px 10px 80px}
     .grid{display:grid;gap:12px}
-
-    .card{
-      background:linear-gradient(180deg,var(--card),var(--card-2));
-      border:1.5px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow)
-    }
-    .card h2{
-      margin:0;padding:14px;font-size:16px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      display:flex;align-items:center;gap:8px;flex-wrap:wrap
-    }
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .card h2{margin:0;padding:14px;font-size:16px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
     .card .content{padding:14px}
-
     label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
-
-    input[type="text"],input[type="number"],textarea,select,input[type="search"],input[type="datetime-local"],input[type="date"]{
-      width:100%;padding:14px 12px;background:#0F1623;color:var(--text);
-      border:1px solid rgba(255,255,255,.12);border-radius:14px;outline:none;font-size:16px
-    }
+    input[type="text"],input[type="number"],textarea,select,input[type="search"],input[type="datetime-local"],input[type="date"]{width:100%;padding:14px 12px;background:#0f141c;color:var(--text);border:1px solid rgba(255,255,255,.09);border-radius:14px;outline:none;font-size:16px}
     input:focus,textarea:focus,select:focus{box-shadow:var(--ring);border-color:var(--accent)}
-
     .row{display:grid;grid-template-columns:1fr;gap:10px}
     @media (min-width:700px){.row{grid-template-columns:1fr 1fr}}
     .row3{display:grid;grid-template-columns:1fr;gap:10px}
     @media (min-width:900px){.row3{grid-template-columns:1fr 1fr 1fr}}
-
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;
-      background:#0F1623;border:1px solid rgba(255,255,255,.14);font-size:12px;color:var(--muted)
-    }
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#0f141c;border:1px solid rgba(255,255,255,.10);font-size:12px;color:var(--muted)}
     .small{font-size:12px;color:var(--muted)}
     .hint{font-size:12px;color:var(--muted)}
     .chips{display:flex;gap:8px;flex-wrap:wrap}
-    .chip{
-      padding:10px 12px;border-radius:12px;background:#0F1623;
-      border:1px solid rgba(255,255,255,.16);cursor:pointer
-    }
-
+    .chip{padding:10px 12px;border-radius:12px;background:#0f141c;border:1px solid rgba(255,255,255,.12);cursor:pointer}
     .sets{display:flex;flex-direction:column;gap:10px}
     .set-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}
-
-    .exercise-block{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:14px;padding:12px;background:#0B1118
-    }
+    .exercise-block{border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px;background:#0b1118}
     .exercise-head{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-bottom:8px}
     .progress{font-size:12px}
     .progress .up{color:var(--ok);font-weight:700}
     .progress .down{color:var(--danger);font-weight:700}
-
     .toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .history{display:flex;flex-direction:column;gap:10px}
-    .entry{
-      display:flex;gap:12px;align-items:center;justify-content:space-between;
-      padding:12px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:#0F1623
-    }
+    .entry{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px;border:1px solid rgba(255,255,255,.06);border-radius:14px;background:#0f141c}
     .entry-main{display:flex;flex-direction:column;gap:6px}
     .entry-title{font-weight:700}
-
     .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
-    .modal{
-      background:linear-gradient(180deg,var(--card),var(--card-2));
-      border:1px solid rgba(255,255,255,.14);border-radius:16px;box-shadow:var(--shadow);
-      width:min(860px,96vw);max-height:92vh;overflow:auto
-    }
-    .modal header{
-      position:sticky;top:0;
-      background:linear-gradient(180deg, rgba(16,24,38,.95), rgba(16,24,38,.8));
-      backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,.08);padding:12px 14px
-    }
+    .modal{background:var(--card);border:1px solid rgba(255,255,255,.10);border-radius:16px;box-shadow:var(--shadow);width:min(860px,96vw);max-height:92vh;overflow:auto}
+    .modal header{position:sticky;top:0;background:linear-gradient(180deg, rgba(18,24,33,.95), rgba(18,24,33,.8));backdrop-filter: blur(6px);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 14px}
     .modal header h3{margin:0;font-size:16px}
     .modal .content{padding:12px 14px}
-    .close{
-      float:right;appearance:none;border:0;background:#0F1623;color:#fff;
-      border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:8px 10px;cursor:pointer
-    }
-
-    .chart-wrap{background:#0F1623;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px}
+    .close{float:right;appearance:none;border:0;background:#0f141c;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 10px;cursor:pointer}
+    .chart-wrap{background:#0f141c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px}
     canvas{width:100%;height:220px;display:block}
     .muted{color:var(--muted)}
-
-    /* ===== Spinbox touch (niente tastiera) ===== */
-    .spin-input{display:flex;flex-direction:column;gap:6px;margin:12px 0}
-    .spinbox{
-      display:flex;align-items:center;justify-content:space-between;gap:8px;
-      padding:8px 10px;background:#0E141B;border:2px solid var(--border);border-radius:12px
-    }
-    .spinbox:focus-within{border-color:var(--accent);box-shadow:0 0 0 2px rgba(92,200,255,.25)}
-    .spinbox input{
-      flex:0 0 120px;text-align:center;font-size:22px;font-weight:700;
-      background:transparent;color:var(--text);border:none;outline:none
-    }
-    .spinbox .knob{display:flex;flex-direction:column;gap:6px}
-    .spinbox .knob button{
-      width:46px;height:36px;border:0;border-radius:10px;font-weight:800;cursor:pointer
-    }
-    .spinbox .knob .up{background:var(--accent);color:#001}
-    .spinbox .knob .down{background:var(--warn);color:#261a00}
-    .spinbox .knob button:active{transform:scale(.98)}
   </style>
+  <style>
+  :root{
+    --bg:#0B0F14;
+    --card:#121821;
+    --text:#E7EDF3;
+    --muted:#9FB3C8;
+    --accent:#4DA3FF;
+    --accent2:#FFB400;
+    --border:#2A3442;
+  }
+  body{background:var(--bg);color:var(--text);}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:16px; margin:12px 0;
+    box-shadow:0 6px 24px rgba(0,0,0,.25);
+  }
+  .card h2{margin:0 0 8px 0}
+  .muted{color:var(--muted)}
+</style>
 </head>
 <body>
   <header>
@@ -199,7 +108,7 @@
       <section class="card" aria-labelledby="h-templates">
         <h2 id="h-templates">Template A / B / C</h2>
         <div class="content">
-          <p class="small">Definisci esercizi e set. Per ogni esercizio imposta una <b>progressione suggerita</b> (carico% o reps%). Puoi ignorarla in qualsiasi momento.</p>
+          <p class="small">Definisci gli esercizi. Puoi incollare la scheda in formato <b>Nome 5x5x15</b> (serie×reps×kg). I kg sono opzionali.</p>
           <div class="chips" style="margin-bottom:10px">
             <button class="chip" data-plan="A">Modifica A</button>
             <button class="chip" data-plan="B">Modifica B</button>
@@ -283,8 +192,8 @@
 
           <div style="height:18px"></div>
           <div class="chart-wrap">
-            <div class="small" style="margin-bottom:6px">Volume settimanale (ultime 8 settimane)</div>
-            <canvas id="volChart" width="800" height="240" aria-label="Grafico volume settimanale"></canvas>
+            <div class="small" style="margin-bottom:6px">Andamento per esercizio — <b>Kg massimo per sessione</b></div>
+            <div id="exerciseCharts"></div>
           </div>
         </div>
       </section>
@@ -296,6 +205,21 @@
     <div class="modal" role="dialog" aria-modal="true">
       <header><button class="close" id="tplClose">Chiudi</button><h3 id="tplTitle">Modifica Template</h3></header>
       <div class="content">
+
+        <!-- Schema rapido (testo) -->
+        <div class="card" style="margin-top:0">
+          <h2 style="padding:0 0 8px 0;border:0">Schema rapido (testo)</h2>
+          <label for="tplQuick">Una riga per esercizio — formato: <b>Nome 5x5x15</b> (serie×reps×kg). I kg sono opzionali.</label>
+          <textarea id="tplQuick" rows="5" placeholder="Panca Piana 5x5x15
+Rematore Bilanciere 4x12
+Squat 5x5x60"></textarea>
+          <div class="hint" style="margin-top:6px">Accetta <code>x</code>, <code>X</code> o <code>×</code>. I kg possono avere decimali (anche <code>12,5</code>).</div>
+          <div class="toolbar" style="margin-top:8px">
+            <button class="btn secondary" id="tplParse">Analizza righe</button>
+            <span class="small muted" id="tplParseMsg" style="margin-left:auto"></span>
+          </div>
+        </div>
+
         <div class="row">
           <div><label for="tplName">Nome scheda (opzionale)</label><input id="tplName" type="text" placeholder="es. Spinta / Tirata / Gambe"></div>
           <div style="align-self:end"><button class="btn secondary" id="tplAddExercise">+ Aggiungi esercizio</button></div>
@@ -308,99 +232,6 @@
     </div>
   </div>
 
-  <!-- ===== Spinbox: trasforma ogni input[number][data-spin] in rotelline touch ===== -->
-  <script>
-  (function(){
-    const $$ = (sel, r=document) => Array.from(r.querySelectorAll(sel));
-    function toPrecision(step){ const s=String(step??1); return s.includes('.')? s.split('.')[1].length : 0; }
-
-    function makeSpinbox(input){
-      if (input.dataset._spinified) return;
-      input.dataset._spinified = '1';
-
-      const stepAttr = input.getAttribute('data-step') ?? input.getAttribute('step') ?? '1';
-      const step = parseFloat(stepAttr) || 1;
-      const min  = input.hasAttribute('min') ? parseFloat(input.getAttribute('min')) : -Infinity;
-      const max  = input.hasAttribute('max') ? parseFloat(input.getAttribute('max')) :  Infinity;
-      const prec = toPrecision(step);
-
-      input.readOnly = true;            // blocca tastiera
-      input.setAttribute('inputmode','none');
-      input.autocomplete = 'off';
-
-      const wrap = document.createElement('div');
-      wrap.className = 'spin-input';
-
-      const box = document.createElement('div');
-      box.className = 'spinbox';
-      box.setAttribute('role','spinbutton');
-      if (isFinite(min)) box.setAttribute('aria-valuemin', String(min));
-      if (isFinite(max)) box.setAttribute('aria-valuemax', String(max));
-
-      const knob = document.createElement('div');
-      knob.className = 'knob';
-      const btnUp = document.createElement('button');
-      btnUp.type='button'; btnUp.className='up'; btnUp.textContent='+';
-      const btnDown = document.createElement('button');
-      btnDown.type='button'; btnDown.className='down'; btnDown.textContent='−';
-      knob.appendChild(btnUp); knob.appendChild(btnDown);
-
-      const parent = input.parentNode;
-      const next = input.nextSibling;
-      box.appendChild(input);
-      box.appendChild(knob);
-      wrap.appendChild(box);
-      parent.insertBefore(wrap, next);
-
-      const fmt = (n)=> Number((+n).toFixed(prec)).toString();
-      function clamp(v){ if(isFinite(min)) v=Math.max(min,v); if(isFinite(max)) v=Math.min(max,v); return v; }
-      function setVal(v){
-        v = clamp(parseFloat(v||'0'));
-        if(Number.isNaN(v)) v = 0;
-        input.value = fmt(v);
-        box.setAttribute('aria-valuenow', input.value);
-        input.dispatchEvent(new Event('input',{bubbles:true}));
-        input.dispatchEvent(new Event('change',{bubbles:true}));
-      }
-      function addVal(d){ setVal((parseFloat(input.value||'0')||0) + d); }
-
-      setVal(input.value || '0');
-
-      [[btnUp, +step],[btnDown,-step]].forEach(([btn,delta])=>{
-        let t, accel=0;
-        const start=(e)=>{e.preventDefault(); addVal(delta);
-          t=setInterval(()=>{ addVal(delta*(1+accel*0.15)); accel=Math.min(accel+1,10); },180);
-        };
-        const stop=()=>{ clearInterval(t); accel=0; };
-        btn.addEventListener('mousedown',start);
-        btn.addEventListener('touchstart',start,{passive:false});
-        window.addEventListener('mouseup',stop);
-        window.addEventListener('touchend',stop);
-        window.addEventListener('touchcancel',stop);
-      });
-
-      input.addEventListener('focus', ()=> input.blur()); // niente focus soft-keyboard
-
-      let startY=0;
-      box.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive:true});
-      box.addEventListener('touchmove',  e => {
-        const dy = startY - e.touches[0].clientY;
-        const steps = Math.round(dy / 60);
-        setVal((parseFloat(input.value||0)||0) + steps * step);
-      }, {passive:true});
-    }
-
-    function spinifyAll(root=document){ $$('input[type="number"][data-spin]', root).forEach(makeSpinbox); }
-    spinifyAll();
-
-    const mo = new MutationObserver(ms=>{
-      for(const m of ms){ m.addedNodes && m.addedNodes.forEach(n=>{ if(n.nodeType===1) spinifyAll(n); }); }
-    });
-    mo.observe(document.documentElement, {childList:true, subtree:true});
-  })();
-  </script>
-
-  <!-- ===== App ===== -->
   <script>
   'use strict';
   /* ===== Helpers & storage ===== */
@@ -434,7 +265,8 @@
     const matches=[];
     for(const w of workouts){ for(const e of w.exercises||[]){ if((e.name||'').toLowerCase()===name.toLowerCase()){
       matches.push({date:w.date,sets:e.sets||[],volume:exerciseVolume(e.sets||[]),maxKg:maxKg(e.sets||[]),reps:totalReps(e.sets||[])});
-    }}} return matches.sort((a,b)=>new Date(a.date)-new Date(b.date));
+    }}}
+    return matches.sort((a,b)=>new Date(a.date)-new Date(b.date));
   }
 
   function latestExerciseSetsOrTemplate(name, templateSets, workouts, useLast=true){
@@ -457,34 +289,19 @@
   /* ===== UI builders ===== */
   function setSliderLabel(id){ $("#"+id).addEventListener('input',e=> $("#"+id+"Out").textContent=e.target.value,{passive:true}) }
 
-  // >>> Spinbox-ready: aggiunge data-spin agli input di set (niente tastiera)
   function makeSetRow(v={reps:'',kg:''}, onChange){
     const row=document.createElement('div'); row.className='set-row';
-    row.innerHTML=`<div>
-                     <label>Ripetizioni</label>
-                     <input type="number" data-spin data-step="1" inputmode="numeric" min="0" step="1" value="${String(v.reps??'').replace(/"/g,'&quot;')}">
-                   </div>
-                   <div>
-                     <label>Kg</label>
-                     <input type="number" data-spin data-step="0.5" inputmode="decimal" min="0" step="0.5" value="${String(v.kg??'').replace(/"/g,'&quot;')}">
-                   </div>`;
+    row.innerHTML=`<div><label>Ripetizioni</label><input type="number" inputmode="numeric" min="0" step="1" value="${String(v.reps??'').replace(/"/g,'&quot;')}"></div>
+                   <div><label>Kg</label><input type="number" inputmode="decimal" min="0" step="0.5" value="${String(v.kg??'').replace(/"/g,'&quot;')}"></div>`;
     const [r,k]=row.querySelectorAll('input'); const h=()=>onChange?.();
     r.addEventListener('input',h,{passive:true}); k.addEventListener('input',h,{passive:true}); return row;
   }
 
   function exerciseBlock(name, sets=[], progCfg=null, onChange){
     const wrap=document.createElement('div'); wrap.className='exercise-block';
-    wrap.innerHTML=`<div class="exercise-head">
-                      <div style="display:flex;gap:8px;align-items:center"><strong>${escapeHtml(name)}</strong></div>
-                      <div class="toolbar">
-                        <button class="btn secondary ex-suggest">Suggerisci ↑</button>
-                        <button class="btn secondary ex-add-set">+ Set</button>
-                        <button class="btn secondary ex-remove">Rimuovi</button>
-                      </div>
-                    </div>
-                    <div class="sets"></div>
-                    <div class="progress" aria-live="polite"></div>
-                    <div class="small muted" data-suggest-msg style="margin-top:6px"></div>`;
+    wrap.innerHTML=`<div class="exercise-head"><div style="display:flex;gap:8px;align-items:center"><strong>${escapeHtml(name)}</strong></div>
+                    <div class="toolbar"><button class="btn secondary ex-suggest">Suggerisci ↑</button><button class="btn secondary ex-add-set">+ Set</button><button class="btn secondary ex-remove">Rimuovi</button></div></div>
+                    <div class="sets"></div><div class="progress" aria-live="polite"></div><div class="small muted" data-suggest-msg style="margin-top:6px"></div>`;
     const setsEl=wrap.querySelector('.sets');
     const renderSets=()=>{setsEl.innerHTML=''; (sets.length?sets:[{}]).forEach(s=>setsEl.appendChild(makeSetRow(s,onChange)));}; renderSets();
     wrap.querySelector('.ex-add-set').addEventListener('click',()=>{sets.push({reps:'',kg:''});renderSets();onChange?.()});
@@ -506,11 +323,7 @@
   function renderTodayFromPlan(plan){
     const presets=loadPresets(); const useLast=($('#useLast').value==='last'); const tpl=(presets[plan]||{}).exercises||[]; const workouts=loadWorkouts();
     const cont=$('#todayExercises'); cont.innerHTML=''; const blocks=[];
-    for(const ex of tpl){
-      const latestSets=latestExerciseSetsOrTemplate(ex.name, ex.sets||[], workouts, useLast);
-      const b=exerciseBlock(ex.name, latestSets, ex.prog||null, debounce(updateTodayStats,150));
-      blocks.push(b); cont.appendChild(b)
-    }
+    for(const ex of tpl){ const latestSets=latestExerciseSetsOrTemplate(ex.name, ex.sets||[], workouts, useLast); const b=exerciseBlock(ex.name, latestSets, ex.prog||null, debounce(updateTodayStats,150)); blocks.push(b); cont.appendChild(b) }
     cont.getAll=()=>blocks.map(b=>b.getData()); cont.applySuggestionsAll=()=>blocks.forEach(b=>b.applySuggestion()); updateTodayStats();
   }
 
@@ -520,7 +333,6 @@
     const ws=loadWorkouts(); const vols=ws.map(w=>sessionVolume(w.exercises||[])); const last3=vols.slice(-3);
     const baseAvg=last3.length?(last3.reduce((a,b)=>a+b,0)/last3.length):0; const p=pctDelta(vol,baseAvg);
     $('#stat-progress').innerHTML=(p==null)?'—':(p>=0?`<span class="up">+${p}%</span>`:`<span class="down">${p}%</span>`);
-
     for(const block of $('#todayExercises').children){
       const data=block.getData?.(); if(!data) continue;
       const prev=previousExerciseStats(data.name,ws);
@@ -541,7 +353,7 @@
     const cleaned=exBlocks.map(e=>({ ...e, sets:e.sets.filter(s=>number(s.reps)>0&&number(s.kg)>0) })).filter(e=>e.sets.length>0);
     if(!cleaned.length){alert('Aggiungi almeno un set valido.');return}
     const entry={id:Math.random().toString(36).slice(2)+Date.now().toString(36),date:when.toISOString(),plan,exercises:cleaned,fatigue:number($('#fatigue').value),strength:number($('#strength').value),notes:$('#notes').value.trim()};
-    const data=loadWorkouts(); data.push(entry); saveWorkouts(data); renderHistory(); updateTodayStats(); drawVolumeChart(); alert('Sessione salvata.');
+    const data=loadWorkouts(); data.push(entry); saveWorkouts(data); renderHistory(); drawExerciseCharts(); alert('Sessione salvata.');
   }
 
   function entryCardHTML(e){
@@ -556,44 +368,148 @@
 
   function renderHistory(){
     const historyEl=$('#history'); const sort=$('#sort').value; const t=$('#filter').value.toLowerCase().trim();
-    let data=loadWorkouts(); if(!data.length){historyEl.innerHTML='<div class="small">Nessun elemento nello storico.</div>'; return}
+    let data=loadWorkouts(); if(!data.length){historyEl.innerHTML='<div class="small">Nessun elemento nello storico.</div>'; drawExerciseCharts(); return}
     if(t) data=data.filter(e=>{const d=e.date.slice(0,10); const hitPlan=(e.plan||'').toLowerCase().includes(t); const hitDate=d.includes(t); const hitEx=(e.exercises||[]).some(x=>(x.name||'').toLowerCase().includes(t)); return hitPlan||hitDate||hitEx});
     const cmp={'date-desc':(a,b)=>new Date(b.date)-new Date(a.date),'date-asc':(a,b)=>new Date(a.date)-new Date(b.date),'volume-desc':(a,b)=>sessionVolume(b.exercises||[])-sessionVolume(a.exercises||[]),'volume-asc':(a,b)=>sessionVolume(a.exercises||[])-sessionVolume(b.exercises||[])}[sort]||(()=>0);
     data.sort(cmp); historyEl.innerHTML=data.map(entryCardHTML).join('');
-    historyEl.querySelectorAll('button[data-id]').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.getAttribute('data-id'); if(confirm('Eliminare questa voce?')){const left=loadWorkouts().filter(x=>x.id!==id); saveWorkouts(left); renderHistory(); drawVolumeChart();}}));
+    historyEl.querySelectorAll('button[data-id]').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.getAttribute('data-id'); if(confirm('Eliminare questa voce?')){const left=loadWorkouts().filter(x=>x.id!==id); saveWorkouts(left); renderHistory(); drawExerciseCharts();}}));
+    drawExerciseCharts();
   }
 
-  function isoWeekKey(d){const date=new Date(d); date.setHours(0,0,0,0); const day=(date.getDay()+6)%7; date.setDate(date.getDate()-day+3); const first=new Date(date.getFullYear(),0,4); const diff=(date-first)/86400000; const week=1+Math.round(diff/7); return `${date.getFullYear()}-W${String(week).padStart(2,'0')}`}
+  /* ===== Grafici per singolo esercizio ===== */
 
-  function groupWeeklyVolumes(){
-    const m=new Map();
-    for(const w of loadWorkouts()){const k=isoWeekKey(w.date); const vol=sessionVolume(w.exercises||[]); m.set(k,(m.get(k)||0)+vol)}
-    const entries=[...m.entries()].sort((a,b)=>a[0].localeCompare(b[0])); return entries.slice(-8)
+  function collectExerciseSeries(){
+    const byName=new Map();
+    const workouts=loadWorkouts().slice().sort((a,b)=>new Date(a.date)-new Date(b.date));
+    for(const w of workouts){
+      const date=new Date(w.date);
+      for(const ex of (w.exercises||[])){
+        const name=(ex.name||'').trim(); if(!name) continue;
+        const sets=ex.sets||[];
+        const rec={date, maxKg:maxKg(sets), reps:totalReps(sets), volume:exerciseVolume(sets)};
+        const arr=byName.get(name)||[]; arr.push(rec); byName.set(name,arr);
+      }
+    }
+    return byName;
   }
 
-  function drawVolumeChart(){
-    const cvs=$('#volChart'); if(!cvs) return; const ctx=cvs.getContext('2d'); const data=groupWeeklyVolumes(); ctx.clearRect(0,0,cvs.width,cvs.height);
-    const w=cvs.width,h=cvs.height,pad=36; ctx.strokeStyle='rgba(255,255,255,0.15)'; ctx.beginPath(); ctx.moveTo(pad,pad); ctx.lineTo(pad,h-pad); ctx.lineTo(w-pad,h-pad); ctx.stroke();
-    const labels=data.map(d=>d[0].slice(-2)); const values=data.map(d=>d[1]); const maxV=Math.max(1,...values); const count=Math.max(1,values.length); const unit=(w-pad*2)/count; const barW=unit*0.6;
-    for(let i=1;i<=4;i++){const y=h-pad-(i/4)*(h-2*pad); ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(w-pad,y); ctx.strokeStyle='rgba(255,255,255,0.08)'; ctx.stroke(); ctx.fillStyle='rgba(255,255,255,0.75)'; const tick=Math.round((i/4)*maxV); ctx.fillText(String(tick),6,y+4)}
-    const baseX=pad+unit/2; values.forEach((v,i)=>{const x=baseX+i*unit; const hb=(v/maxV)*(h-2*pad); ctx.fillStyle='#5cc8ff'; ctx.fillRect(x-barW/2,(h-pad)-hb,barW,hb); ctx.fillStyle='rgba(255,255,255,0.95)'; ctx.fillText(labels[i],x-6,h-pad+14)})
+  function drawLineChart(canvas, values, dates){
+    const ctx=canvas.getContext('2d');
+    const w=canvas.width, h=canvas.height, pad=36;
+    ctx.clearRect(0,0,w,h);
+
+    if(values.length===0){ return; }
+
+    const maxV=Math.max(...values, 1);
+    const minV=0;
+
+    // assi
+    ctx.strokeStyle='rgba(255,255,255,0.15)';
+    ctx.beginPath();
+    ctx.moveTo(pad,pad); ctx.lineTo(pad,h-pad); ctx.lineTo(w-pad,h-pad); ctx.stroke();
+
+    // griglia orizzontale
+    for(let i=1;i<=4;i++){
+      const y=h-pad-(i/4)*(h-2*pad);
+      ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(w-pad,y);
+      ctx.strokeStyle='rgba(255,255,255,0.08)'; ctx.stroke();
+      ctx.fillStyle='rgba(255,255,255,0.6)';
+      const tick=Math.round(minV + (i/4)*(maxV-minV));
+      ctx.fillText(String(tick),6,y+4);
+    }
+
+    // scala X
+    const n=values.length;
+    const unit=(w-pad*2)/Math.max(1,(n-1));
+    const xAt=i=>pad + i*unit;
+    const yAt=v=> (h-pad) - ((v-minV)/(maxV-minV))*(h-2*pad);
+
+    // linea
+    ctx.beginPath();
+    for(let i=0;i<n;i++){
+      const x=xAt(i), y=yAt(values[i]);
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.strokeStyle='#5cc8ff';
+    ctx.lineWidth=2;
+    ctx.stroke();
+
+    // punti
+    for(let i=0;i<n;i++){
+      const x=xAt(i), y=yAt(values[i]);
+      ctx.beginPath();
+      ctx.arc(x,y,3,0,Math.PI*2);
+      ctx.fillStyle='#8ee8ff';
+      ctx.fill();
+    }
+
+    // etichette data ogni ~6 punti
+    const step=Math.max(1, Math.ceil(n/6));
+    ctx.fillStyle='rgba(255,255,255,0.9)';
+    ctx.textAlign='center';
+    for(let i=0;i<n;i+=step){
+      const d=dates[i];
+      const lab = `${pad2(d.getDate())}/${pad2(d.getMonth()+1)}`;
+      const x=xAt(i);
+      ctx.fillText(lab, x, h-pad+14);
+    }
+
+    function pad2(v){return String(v).padStart(2,'0')}
+  }
+
+  function drawExerciseCharts(){
+    const cont=$('#exerciseCharts'); if(!cont) return;
+    cont.innerHTML='';
+    const byName=collectExerciseSeries();
+    if(byName.size===0){ cont.innerHTML='<div class="small">Aggiungi qualche sessione per vedere i grafici per esercizio.</div>'; return; }
+    // ordina alfabeticamente
+    const entries=[...byName.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
+    for(const [name, series] of entries){
+      const wrap=document.createElement('div');
+      wrap.className='card';
+      wrap.innerHTML=`<div class="small" style="margin-bottom:6px"><b>${escapeHtml(name)}</b> — ${series.length} sessioni · metrica: Kg massimo</div>
+      <canvas width="800" height="220" aria-label="Grafico ${escapeHtml(name)}"></canvas>`;
+      cont.appendChild(wrap);
+      const cvs=wrap.querySelector('canvas');
+      const values=series.map(s=>s.maxKg);
+      const dates=series.map(s=>s.date);
+      drawLineChart(cvs, values, dates);
+    }
   }
 
   /* ===== Templates modal ===== */
   let currentTplKey='A';
+
+  // Parser "Schema rapido" — supporta: "Nome 5x5" e "Nome 5x5x15"
+  function parseQuickTemplate(text){
+    const lines=text.split(/\r?\n/);
+    const items=[]; const errs=[];
+    lines.forEach((line,idx)=>{
+      const s=line.trim(); if(!s) return;
+      const m=s.match(/^(.+?)\s+(\d+)\s*[xX×]\s*(\d+)(?:\s*[xX×]\s*([0-9]+(?:[.,][0-9]+)?))?$/);
+      if(m){
+        const name=m[1].trim();
+        const setsCount=parseInt(m[2],10);
+        const reps=parseInt(m[3],10);
+        const kgRaw=(m[4]??'').replace(',','.');
+        const kgVal=kgRaw? parseFloat(kgRaw) : '';
+        const sets=Array.from({length:Math.max(1,setsCount)},()=>({reps:reps,kg:kgVal}));
+        items.push({name,sets,prog:{mode:'load',pct:2.5,roundKg:0.5}});
+      }else{
+        errs.push(idx+1);
+      }
+    });
+    return {items,errs};
+  }
+
   function openTplModal(key){
     currentTplKey=key; const all=loadPresets(); const tpl=all[key]||{name:key,exercises:[]};
     $('#tplTitle').textContent=`Modifica Template ${key}`; $('#tplName').value=tpl.name||key;
+
     const cont=$('#tplExercises'); cont.innerHTML=''; const blocks=[];
     const addBlock=(name='',sets=[],prog={mode:'load',pct:2.5,roundKg:0.5})=>{
       const box=document.createElement('div'); box.className='exercise-block';
-      box.innerHTML=`<div class="exercise-head">
-                        <strong>Nome esercizio</strong>
-                        <div class="toolbar">
-                          <button class="btn secondary t-add-set">+ Set</button>
-                          <button class="btn secondary t-remove">Rimuovi</button>
-                        </div>
-                      </div>
+      box.innerHTML=`<div class="exercise-head"><strong>Nome esercizio</strong><div class="toolbar"><button class="btn secondary t-add-set">+ Set</button><button class="btn secondary t-remove">Rimuovi</button></div></div>
       <div><input type="text" class="t-name" placeholder="es. Panca piana" value="${escapeHtml(name)}"></div>
       <div class="sets" style="margin-top:8px"></div>
       <div class="row" style="margin-top:8px">
@@ -601,26 +517,31 @@
         <div><label>Percentuale suggerita</label><input class="t-prog-pct" type="number" min="1" max="10" step="0.5" value="${String(prog?.pct ?? (prog?.mode==='reps'?5:2.5)).replace(/"/g,'&quot;')}"><div class="hint">Carico ~2.5%, reps ~5%.</div></div>
       </div>
       <div class="row"><div><label>Arrotondamento kg</label><input class="t-prog-round" type="number" min="0" step="0.25" value="${String(prog?.roundKg ?? 0.5).replace(/"/g,'&quot;')}"><div class="hint">0.5kg con microplates.</div></div></div>`;
-      const setsEl=box.querySelector('.sets');
-      const renderSets=()=>{setsEl.innerHTML='';(sets.length?sets:[{}]).forEach(s=>setsEl.appendChild(
-        // anche nel template: data-spin
-        (function(){ const r=document.createElement('div'); r.className='set-row';
-          r.innerHTML=`<div><label>Ripetizioni</label><input type="number" data-spin data-step="1" min="0" step="1" value="${String(s.reps??'').replace(/"/g,'&quot;')}"></div>
-                       <div><label>Kg</label><input type="number" data-spin data-step="0.5" min="0" step="0.5" value="${String(s.kg??'').replace(/"/g,'&quot;')}"></div>`;
-          return r;
-        })()
-      ))};
-      renderSets();
+      const setsEl=box.querySelector('.sets'); const renderSets=()=>{setsEl.innerHTML='';(sets.length?sets:[{}]).forEach(s=>setsEl.appendChild(makeSetRow({reps:String(s.reps||''),kg:String(s.kg||'')})))}; renderSets();
       box.querySelector('.t-add-set').addEventListener('click',()=>{sets.push({reps:'',kg:''});renderSets()});
       box.querySelector('.t-remove').addEventListener('click',()=>box.remove());
-      box.getData=()=>({name:box.querySelector('.t-name').value.trim(),
-                         sets:[...setsEl.children].map(r=>{const [re,kg]=r.querySelectorAll('input');return{reps:number(re.value),kg:number(kg.value)}}).filter(s=>s.reps>0&&s.kg>0),
-                         prog:{mode:box.querySelector('.t-prog-mode').value,pct:number(box.querySelector('.t-prog-pct').value),roundKg:number(box.querySelector('.t-prog-round').value)}});
+      box.getData=()=>({name:box.querySelector('.t-name').value.trim(),sets:[...setsEl.children].map(r=>{const [re,kg]=r.querySelectorAll('input');return{reps:number(re.value),kg:number(kg.value)}}).filter(s=>s.reps>0),prog:{mode:box.querySelector('.t-prog-mode').value,pct:number(box.querySelector('.t-prog-pct').value),roundKg:number(box.querySelector('.t-prog-round').value)}});
       cont.appendChild(box); blocks.push(box);
     };
+
     (tpl.exercises||[]).forEach(ex=>addBlock(ex.name||'',ex.sets||[],ex.prog||{mode:'load',pct:2.5,roundKg:0.5}));
+
+    $('#tplParse').onclick=()=>{
+      const {items,errs}=parseQuickTemplate($('#tplQuick').value);
+      const msg=$('#tplParseMsg');
+      if(!items.length){ msg.textContent='Nessuna riga valida trovata.'; return; }
+      cont.innerHTML=''; blocks.length=0;
+      items.forEach(it=>addBlock(it.name,it.sets,it.prog));
+      msg.textContent=`Aggiunti ${items.length} esercizi` + (errs.length?` · righe ignorate: ${errs.join(', ')}`:'');
+    };
+
     $('#tplAddExercise').onclick=()=>addBlock('',[],{mode:'load',pct:2.5,roundKg:0.5});
-    $('#tplSave').onclick=()=>{const name=$('#tplName').value.trim()||key; const ex=blocks.map(b=>b.getData()).filter(x=>x.name); const all=loadPresets(); all[key]={name,exercises:ex}; savePresets(all); alert(`Template ${key} salvato.`); closeTplModal()};
+    $('#tplSave').onclick=()=>{
+      const name=$('#tplName').value.trim()||key;
+      const ex=blocks.map(b=>b.getData()).filter(x=>x.name);
+      const all=loadPresets(); all[key]={name,exercises:ex}; savePresets(all);
+      alert(`Template ${key} salvato.`); closeTplModal()
+    };
     $('#tplClear').onclick=()=>{ if(!confirm('Sicuro di svuotare questo template?')) return; const all=loadPresets(); all[key]={name:key,exercises:[]}; savePresets(all); openTplModal(key) };
     showTplModal(true);
   }
@@ -630,7 +551,7 @@
   /* ===== Export / Import + Install UI ===== */
   function download(filename, text){ const blob=new Blob([text],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),800) }
   function onExport(){ const payload={workouts:loadWorkouts(),presets:loadPresets(),exportedAt:new Date().toISOString()}; download('workouts_backup.json', JSON.stringify(payload,null,2)) }
-  function onImport(file){ const r=new FileReader(); r.onload=()=>{ try{ const obj=JSON.parse(r.result); if(Array.isArray(obj.workouts)) saveWorkouts(obj.workouts); if(obj.presets&&typeof obj.presets==='object') savePresets(obj.presets); renderHistory(); drawVolumeChart(); alert('Ripristino completato') }catch{ alert('File non valido') } }; r.readAsText(file) }
+  function onImport(file){ const r=new FileReader(); r.onload=()=>{ try{ const obj=JSON.parse(r.result); if(Array.isArray(obj.workouts)) saveWorkouts(obj.workouts); if(obj.presets&&typeof obj.presets==='object') savePresets(obj.presets); renderHistory(); drawExerciseCharts(); alert('Ripristino completato') }catch{ alert('File non valido') } }; r.readAsText(file) }
   function setupInstallUI(){ const btn=$('#installBtn'); let p=null; window.addEventListener('beforeinstallprompt',e=>{e.preventDefault(); p=e; btn.style.display=''}); btn.addEventListener('click',async()=>{if(!p)return; btn.disabled=true; try{await p.prompt(); await p.userChoice}catch{} p=null; btn.style.display='none'; btn.disabled=false}); window.addEventListener('appinstalled',()=>btn.style.display='none'); if(window.matchMedia('(display-mode: standalone)').matches) btn.style.display='none' }
 
   /* ===== Init ===== */
@@ -646,7 +567,7 @@
     $('#clearToday').addEventListener('click',()=>{$('#todayPlan').value=''; $('#todayExercises').innerHTML=''; $('#notes').value=''; updateTodayStats()});
     document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>openTplModal(b.dataset.plan)));
     $('#tplClose').addEventListener('click',closeTplModal); $('#tplModalBg').addEventListener('click',e=>{if(e.target.id==='tplModalBg') closeTplModal()});
-    $('#filter').addEventListener('input',renderHistory); $('#sort').addEventListener('change',renderHistory); renderHistory(); drawVolumeChart();
+    $('#filter').addEventListener('input',renderHistory); $('#sort').addEventListener('change',renderHistory); renderHistory(); drawExerciseCharts();
     $('#export').addEventListener('click',onExport); $('#import-btn').addEventListener('click',()=>$('#import').click()); $('#import').addEventListener('change',e=>{const f=e.target.files[0]; if(f) onImport(f); e.target.value=''});
     setupInstallUI();
     if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js'); }
