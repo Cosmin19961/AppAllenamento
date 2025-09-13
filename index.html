@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Diario Allenamenti — v6.2 (A/B/C + Progressioni)</title>
+  <title>Diario Allenamenti — v6.3 (A/B/C + Progressioni — fix "ultimi carichi" per scheda)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -131,8 +131,8 @@
             </div>
             <div>
               <label for="useLast">Sorgente valori</label>
-              <select id="useLast"><option value="last" selected>Usa ultimi carichi</option><option value="template">Usa valori template</option></select>
-              <div class="hint">“Ultimi carichi” prende i set più recenti registrati per quell’esercizio.</div>
+              <select id="useLast"><option value="last" selected>Usa ultimi carichi (di questa scheda)</option><option value="template">Usa valori template</option></select>
+              <div class="hint">“Ultimi carichi” ora è filtrato per <b>scheda A/B/C</b> oltre che per nome esercizio.</div>
             </div>
           </div>
 
@@ -240,7 +240,7 @@ Squat 5x5x60"></textarea>
   const pad=n=>String(n).padStart(2,'0');
   const fmtDate=d=>{const dt=new Date(d);return `${dt.getFullYear()}-${pad(dt.getMonth()+1)}-${pad(dt.getDate())} ${pad(dt.getHours())}:${pad(dt.getMinutes())}`};
   const number=v=>{const n=parseFloat(v);return Number.isFinite(n)?n:0};
-  const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
   const load=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch{return d}};
   const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
   const debounce=(fn,wait=200)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),wait)}};
@@ -261,18 +261,33 @@ Squat 5x5x60"></textarea>
   const totalReps=sets=>sets.reduce((s,x)=>s+number(x.reps),0);
   const pctDelta=(curr,base)=>base>0?Math.round(((curr-base)/base)*100):null;
 
-  function previousExerciseStats(name, workouts){
+  /**
+   * Ritorna le serie precedenti per un esercizio, opzionalmente filtrate per scheda (A/B/C).
+   * Questo è il FIX: filtriamo per name + plan quando serve.
+   */
+  function previousExerciseStats(name, workouts, planFilter=null){
     const matches=[];
-    for(const w of workouts){ for(const e of w.exercises||[]){ if((e.name||'').toLowerCase()===name.toLowerCase()){
-      matches.push({date:w.date,sets:e.sets||[],volume:exerciseVolume(e.sets||[]),maxKg:maxKg(e.sets||[]),reps:totalReps(e.sets||[])});
-    }}}
+    const lname=(name||'').toLowerCase();
+    for(const w of workouts){
+      if(planFilter && w.plan!==planFilter) continue; // filtro per scheda
+      for(const e of (w.exercises||[])){
+        if((e.name||'').toLowerCase()===lname){
+          matches.push({date:w.date,plan:w.plan,sets:e.sets||[],volume:exerciseVolume(e.sets||[]),maxKg:maxKg(e.sets||[]),reps:totalReps(e.sets||[])});
+        }
+      }
+    }
     return matches.sort((a,b)=>new Date(a.date)-new Date(b.date));
   }
 
-  function latestExerciseSetsOrTemplate(name, templateSets, workouts, useLast=true){
+  /**
+   * Restituisce i set più recenti o il template, ma – novità – se useLast=true filtra per scheda corrente.
+   */
+  function latestExerciseSetsOrTemplate(name, templateSets, workouts, useLast=true, plan=null){
     if(!useLast) return templateSets;
-    const prev=previousExerciseStats(name,workouts); if(!prev.length) return templateSets;
-    const last=prev[prev.length-1].sets; return last && last.length? last.map(s=>({reps:String(s.reps||''),kg:String(s.kg||'')})) : templateSets;
+    const prev=previousExerciseStats(name,workouts,plan); // <-- filtrato per plan
+    if(!prev.length) return templateSets;
+    const last=prev[prev.length-1].sets;
+    return last && last.length? last.map(s=>({reps:String(s.reps||''),kg:String(s.kg||'')})) : templateSets;
   }
 
   function suggestProgressionForSets(sets, prog){
@@ -323,7 +338,12 @@ Squat 5x5x60"></textarea>
   function renderTodayFromPlan(plan){
     const presets=loadPresets(); const useLast=($('#useLast').value==='last'); const tpl=(presets[plan]||{}).exercises||[]; const workouts=loadWorkouts();
     const cont=$('#todayExercises'); cont.innerHTML=''; const blocks=[];
-    for(const ex of tpl){ const latestSets=latestExerciseSetsOrTemplate(ex.name, ex.sets||[], workouts, useLast); const b=exerciseBlock(ex.name, latestSets, ex.prog||null, debounce(updateTodayStats,150)); blocks.push(b); cont.appendChild(b) }
+    for(const ex of tpl){
+      // FIX applicato qui: passiamo anche "plan" per pescare gli ultimi set della stessa scheda
+      const latestSets=latestExerciseSetsOrTemplate(ex.name, ex.sets||[], workouts, useLast, plan);
+      const b=exerciseBlock(ex.name, latestSets, ex.prog||null, debounce(updateTodayStats,150));
+      blocks.push(b); cont.appendChild(b)
+    }
     cont.getAll=()=>blocks.map(b=>b.getData()); cont.applySuggestionsAll=()=>blocks.forEach(b=>b.applySuggestion()); updateTodayStats();
   }
 
@@ -333,12 +353,16 @@ Squat 5x5x60"></textarea>
     const ws=loadWorkouts(); const vols=ws.map(w=>sessionVolume(w.exercises||[])); const last3=vols.slice(-3);
     const baseAvg=last3.length?(last3.reduce((a,b)=>a+b,0)/last3.length):0; const p=pctDelta(vol,baseAvg);
     $('#stat-progress').innerHTML=(p==null)?'—':(p>=0?`<span class="up">+${p}%</span>`:`<span class="down">${p}%</span>`);
+
+    // Anche le metriche per-esercizio confrontano solo con lo storico della stessa scheda selezionata
+    const currentPlan=$('#todayPlan').value || null;
     for(const block of $('#todayExercises').children){
       const data=block.getData?.(); if(!data) continue;
-      const prev=previousExerciseStats(data.name,ws);
-      const baseV=prev.slice(-3).map(x=>x.volume).reduce((a,b)=>a+b,0)/(prev.slice(-3).length||1);
-      const baseR=prev.slice(-3).map(x=>x.reps).reduce((a,b)=>a+b,0)/(prev.slice(-3).length||1);
-      const baseK=prev.slice(-3).map(x=>x.maxKg).reduce((a,b)=>a+b,0)/(prev.slice(-3).length||1);
+      const prev=previousExerciseStats(data.name,ws,currentPlan);
+      const slice=prev.slice(-3);
+      const baseV=slice.map(x=>x.volume).reduce((a,b)=>a+b,0)/(slice.length||1);
+      const baseR=slice.map(x=>x.reps).reduce((a,b)=>a+b,0)/(slice.length||1);
+      const baseK=slice.map(x=>x.maxKg).reduce((a,b)=>a+b,0)/(slice.length||1);
       const currV=exerciseVolume(data.sets), currR=totalReps(data.sets), currK=maxKg(data.sets);
       const dv=pctDelta(currV,baseV), dr=pctDelta(currR,baseR), dk=pctDelta(currK,baseK);
       const fmt=(lab,val)=>val==null?`${lab}: —`:(val>=0?`${lab}: <span class="up">+${val}%</span>`:`${lab}: <span class="down">${val}%</span>`);
@@ -350,7 +374,7 @@ Squat 5x5x60"></textarea>
     const plan=$('#todayPlan').value; if(!plan){alert('Seleziona A, B o C.');return}
     const when=$('#todayDate').value?new Date($('#todayDate').value):new Date();
     const exBlocks=$('#todayExercises').getAll?.()||[]; if(!exBlocks.length){alert('Il template selezionato non contiene esercizi.');return}
-    const cleaned=exBlocks.map(e=>({ ...e, sets:e.sets.filter(s=>number(s.reps)>0&&number(s.kg)>0) })).filter(e=>e.sets.length>0);
+    const cleaned=exBlocks.map(e=>({...e, sets:e.sets.filter(s=>number(s.reps)>0&&number(s.kg)>0)})).filter(e=>e.sets.length>0);
     if(!cleaned.length){alert('Aggiungi almeno un set valido.');return}
     const entry={id:Math.random().toString(36).slice(2)+Date.now().toString(36),date:when.toISOString(),plan,exercises:cleaned,fatigue:number($('#fatigue').value),strength:number($('#strength').value),notes:$('#notes').value.trim()};
     const data=loadWorkouts(); data.push(entry); saveWorkouts(data); renderHistory(); drawExerciseCharts(); alert('Sessione salvata.');
